@@ -1,4 +1,5 @@
 let sp = [];
+let sc = []
 
 function setup() {
   angleMode(DEGREES);
@@ -13,9 +14,17 @@ function draw() {
 // 	line(sp[i].pos.x,sp[i].pos.y,sp[i+1].pos.x,sp[i+1].pos.y);
 	
 //   }
+for (const [index, particula] of sc.entries()) {
+  particula.update();
+  particula.displayCirculos();
+
+  if (particula.estaMuerta) {
+    sc.splice(index, 1);
+  }
+}
   for(const [index, particula] of sp.entries()){
 	particula.update()
-	particula.display()
+	particula.displayPetalos()
 
 	if(particula.estaMuerta){
 		sp.splice(index,1);
@@ -23,7 +32,9 @@ function draw() {
   }
 
   let np = new Particula(mouseX,mouseY);
+  let np2 = new Particula(mouseX, mouseY);
   sp.push(np)
+  sc.push(np2)
 }
 
 function mouseClicked(){
